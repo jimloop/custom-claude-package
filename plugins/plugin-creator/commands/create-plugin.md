@@ -119,3 +119,16 @@ Agent:
 | 提供知识/规范/模式 | Skill |
 | 在事件时自动处理 | Hook |
 | 完整的插件包 | 完整插件 |
+
+---
+
+## ⚠️ 多插件仓库注意事项
+
+如果你计划在一个仓库中管理多个插件：
+
+1. **目录结构**：使用 `plugins/` 目录存放所有子插件
+2. **marketplace.json**：放在根目录 `.claude-plugin/` 下
+3. **子插件**：只需要 `plugin.json`，不需要 `marketplace.json`
+4. **source 路径**：必须包含 `plugins/` 前缀，如 `./plugins/plugin-name`
+
+详细说明请参考 Agent 的多插件结构文档。

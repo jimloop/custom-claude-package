@@ -350,6 +350,8 @@ echo "$input"
 
 ## 插件结构
 
+### 单插件结构
+
 ```
 my-plugin/
 ├── .claude-plugin/
@@ -368,6 +370,105 @@ my-plugin/
 └── rules/                 # Rule 定义
     └── my-rule.md
 ```
+
+### 多插件结构（Monorepo）
+
+当在一个仓库中管理多个插件时，使用以下结构：
+
+```
+my-plugins/
+├── .claude-plugin/
+│   └── marketplace.json   # 根目录的市场配置（必需）
+├── plugins/
+│   ├── plugin-a/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json    # 子插件只需要 plugin.json
+│   │   ├── agents/
+│   │   └── commands/
+│   └── plugin-b/
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       ├── skills/
+│       └── hooks/
+└── README.md
+```
+
+**多插件 marketplace.json 示例：**
+
+```json
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "my-plugins",
+  "description": "插件集合描述",
+  "owner": { "name": "作者名" },
+  "plugins": [
+    {
+      "name": "plugin-a",
+      "source": "./plugins/plugin-a",
+      "description": "插件 A 描述",
+      "version": "1.0.0"
+    },
+    {
+      "name": "plugin-b",
+      "source": "./plugins/plugin-b",
+      "description": "插件 B 描述",
+      "version": "1.0.0"
+    }
+  ]
+}
+```
+
+---
+
+## ⚠️ 常见问题与注意事项
+
+### 多插件目录创建问题
+
+**问题 1：Marketplace not found 错误**
+
+```
+Marketplace "my-plugins" not found
+Failed to load marketplace from source (git): Marketplace file not found
+```
+
+**原因：** marketplace.json 位置不正确或 source 路径错误
+
+**解决方案：**
+1. 确保 marketplace.json 在仓库根目录的 `.claude-plugin/` 下
+2. 确保 `source` 路径相对于仓库根目录
+3. 正确路径：`./plugins/plugin-name`，不是 `./plugin-name`
+
+**问题 2：子插件不需要 marketplace.json**
+
+- ❌ 错误：在每个子插件目录放置 marketplace.json
+- ✅ 正确：子插件只需要 plugin.json
+
+**问题 3：目录结构不一致**
+
+```
+❌ 错误结构：
+my-plugins/
+├── .claude-plugin/
+│   └── marketplace.json
+├── plugin-a/              # 缺少 plugins/ 层级
+│   └── ...
+
+✅ 正确结构：
+my-plugins/
+├── .claude-plugin/
+│   └── marketplace.json
+├── plugins/
+│   └── plugin-a/
+│       └── ...
+```
+
+### 创建插件前的检查清单
+
+- [ ] 确定是单插件还是多插件仓库
+- [ ] marketplace.json 放置位置正确（根目录）
+- [ ] 子插件的 source 路径正确
+- [ ] 子插件只包含 plugin.json，不包含 marketplace.json
+- [ ] 所有插件名称唯一且符合命名规范（小写、连字符分隔）
 
 ---
 

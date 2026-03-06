@@ -56,6 +56,8 @@ description: Claude Code 插件创建向导 - 帮助生成 agents、commands、s
 
 ## 插件结构模板
 
+### 单插件结构
+
 ```
 plugin-name/
 ├── .claude-plugin/
@@ -74,6 +76,76 @@ plugin-name/
 └── rules/                 # Rule 定义
     └── rule-name.md
 ```
+
+### 多插件结构（Monorepo）
+
+```
+my-plugins/
+├── .claude-plugin/
+│   └── marketplace.json   # 根目录的市场配置（必需）
+├── plugins/
+│   ├── plugin-a/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json    # 子插件只需要 plugin.json
+│   │   ├── agents/
+│   │   └── commands/
+│   └── plugin-b/
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       ├── skills/
+│       └── hooks/
+└── README.md
+```
+
+**多插件 marketplace.json：**
+
+```json
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "my-plugins",
+  "description": "插件集合描述",
+  "owner": { "name": "作者名" },
+  "plugins": [
+    {
+      "name": "plugin-a",
+      "source": "./plugins/plugin-a",
+      "description": "插件 A 描述",
+      "version": "1.0.0"
+    },
+    {
+      "name": "plugin-b",
+      "source": "./plugins/plugin-b",
+      "description": "插件 B 描述",
+      "version": "1.0.0"
+    }
+  ]
+}
+```
+
+---
+
+## ⚠️ 常见问题
+
+### 多插件目录问题
+
+| 问题 | 原因 | 解决方案 |
+|------|------|---------|
+| Marketplace not found | marketplace.json 位置错误 | 放在根目录 `.claude-plugin/` 下 |
+| 插件加载失败 | source 路径错误 | 使用 `./plugins/plugin-name` 格式 |
+| 重复配置冲突 | 子插件有 marketplace.json | 子插件只保留 plugin.json |
+| 目录层级错误 | 缺少 plugins/ 目录 | 按多插件结构创建目录 |
+
+### 检查清单
+
+**创建前确认：**
+- [ ] 单插件还是多插件仓库？
+- [ ] marketplace.json 在正确位置？
+- [ ] source 路径相对于根目录？
+
+**多插件特别注意：**
+- [ ] 子插件目录在 `plugins/` 下
+- [ ] 子插件只有 `plugin.json`，无 `marketplace.json`
+- [ ] source 路径包含 `plugins/` 前缀
 
 ---
 

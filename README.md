@@ -2,6 +2,8 @@
 
 Claude Code 扩展包，包含两个独立插件。
 
+**当前版本：1.2.0**
+
 ## 插件列表
 
 ### 1. Deploy Workflow
@@ -32,6 +34,7 @@ Claude Code 扩展包，包含两个独立插件。
 - 创建新插件骨架
 - 添加 Agent、Command、Skill、Hook
 - 验证插件配置
+- **多插件仓库结构指导**（v1.1.0 新增）
 
 安装：
 ```
@@ -57,12 +60,12 @@ Claude Code 扩展包，包含两个独立插件。
 
 ```
 custom-claude-package/
+├── .claude-plugin/
+│   └── marketplace.json      # 根目录市场配置（多插件必需）
 ├── plugins/
 │   ├── deploy-workflow/      # 部署工作流插件
 │   │   ├── .claude-plugin/
-│   │   │   ├── plugin.json
-│   │   │   ├── marketplace.json
-│   │   │   └── README.md
+│   │   │   └── plugin.json   # 子插件只需 plugin.json
 │   │   ├── agents/
 │   │   │   └── deploy-workflow.md
 │   │   ├── commands/
@@ -71,9 +74,7 @@ custom-claude-package/
 │   │       └── workdone-deploy/SKILL.md
 │   └── plugin-creator/       # 插件创建工具
 │       ├── .claude-plugin/
-│       │   ├── plugin.json
-│       │   ├── marketplace.json
-│       │   └── README.md
+│       │   └── plugin.json   # 子插件只需 plugin.json
 │       ├── agents/
 │       │   └── plugin-creator.md
 │       ├── commands/
@@ -82,6 +83,8 @@ custom-claude-package/
 │           └── create-plugin/SKILL.md
 └── README.md
 ```
+
+> **注意**：多插件仓库中，子插件目录只需要 `plugin.json`，不需要 `marketplace.json`。
 
 ## 部署配置
 
