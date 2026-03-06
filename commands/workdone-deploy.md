@@ -1,21 +1,10 @@
 ---
-name: workdone-deploy
 description: 执行完整的部署工作流 - 更新文档、自动提交、推送确认、推送执行、部署确认、自动部署到云服务器
-agent: deploy-workflow
 ---
 
 # Workdone Deploy Command
 
 执行完整的 Git 工作流和部署流程。
-
-## 触发方式
-
-在对话中输入：
-- `workdone-deploy`
-- `work-done`
-- `deploy`
-
-## 执行流程
 
 此命令会启动 `deploy-workflow` Agent，按顺序执行：
 
