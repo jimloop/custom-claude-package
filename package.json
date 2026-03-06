@@ -1,0 +1,16 @@
+{
+  "name": "custom-claude-package",
+  "version": "1.0.0",
+  "description": "自定义 Claude Code 扩展包，包含部署工作流 Agent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude-code",
+    "agent",
+    "deployment"
+  ],
+  "author": "",
+  "license": "MIT"
+}
