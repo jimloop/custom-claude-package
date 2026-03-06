@@ -50,15 +50,33 @@ tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob", "Agent"]
 
 1. **检测代码扫描插件**
    - 搜索已安装的代码审查类 Agent
-   - 匹配关键词：`comprehensive-review`, `code-reviewer`, `security-review`
-   - 优先级：`comprehensive-review:code-reviewer` > `everything-claude-code:code-reviewer` > 其他
+   - 匹配关键词：`code-reviewer`, `comprehensive-review`, `security-review`, `code-review`
+   - 收集所有匹配的插件列表
 
-2. **执行扫描**（如果找到插件）
-   - 调用检测到的代码扫描 Agent
+2. **用户选择插件**（如果找到多个插件）
+   ```
+   🔍 检测到以下代码扫描插件：
+
+   [1] comprehensive-review:code-reviewer
+       └─ 全面代码审查：架构、安全性、性能
+
+   [2] everything-claude-code:code-reviewer
+       └─ 代码质量审查：最佳实践、可维护性
+
+   [3] everything-claude-code:security-reviewer
+       └─ 安全审查：OWASP、漏洞检测
+
+   [4] 跳过扫描，直接推送
+
+   请选择要使用的扫描插件 [1-4]：
+   ```
+
+3. **执行扫描**
+   - 使用用户选择的插件调用 Agent 工具
    - 阻塞等待扫描完成
    - 显示扫描结果
 
-3. **处理扫描结果**
+4. **处理扫描结果**
    - 扫描通过 → 继续执行推送
    - 扫描发现问题：
      ```
@@ -71,10 +89,15 @@ tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob", "Agent"]
      3. 取消推送，返回修改
      ```
 
-4. **未找到扫描插件**
+5. **未找到扫描插件**
    ```
    ⚠️ 未检测到代码扫描插件，跳过扫描
    → 继续执行推送
+   ```
+
+6. **用户选择跳过**
+   ```
+   → 跳过代码扫描，继续执行推送
    ```
 
 ### 阶段 5：推送执行

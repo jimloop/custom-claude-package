@@ -13,8 +13,8 @@ Claude Code 扩展包，包含两个独立插件。
 部署工作流 Agent，支持：
 - 自动 Git 提交
 - 推送确认
+- **推送前代码扫描**（支持选择扫描插件）
 - 远程部署到云服务器
-- **代码扫描 Hook**（提交前自动扫描）
 
 安装：
 ```
@@ -71,8 +71,6 @@ custom-claude-package/
 │   │   │   └── deploy-workflow.md
 │   │   ├── commands/
 │   │   │   └── workdone-deploy.md
-│   │   ├── hooks/
-│   │   │   └── code-scanning.md  # 代码扫描 Hook
 │   │   └── skills/
 │   │       └── workdone-deploy/SKILL.md
 │   └── plugin-creator/       # 插件创建工具
