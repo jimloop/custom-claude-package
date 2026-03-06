@@ -1,17 +1,45 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "custom-claude-package",
-  "description": "自定义 Claude Code 扩展包 - 部署工作流 Agent",
+  "description": "自定义 Claude Code 扩展包 - 部署工作流 Agent，支持自动提交、推送、部署到云服务器",
+  "owner": {
+    "name": "jimloop",
+    "url": "https://github.com/jimloop"
+  },
+  "metadata": {
+    "description": "自定义 Claude Code 扩展包 - 部署工作流 Agent"
+  },
   "plugins": [
     {
-      "id": "deploy-workflow",
-      "name": "Deploy Workflow Agent",
-      "version": "1.0.0",
+      "name": "custom-claude-package",
+      "source": "./",
       "description": "完整的部署工作流代理：更新文档 → 自动提交 → 推送确认 → 推送执行 → 部署到云服务器",
-      "author": "jimloop",
+      "version": "1.0.0",
+      "author": {
+        "name": "jimloop",
+        "url": "https://github.com/jimloop"
+      },
+      "homepage": "https://github.com/jimloop/custom-claude-package",
+      "repository": "https://github.com/jimloop/custom-claude-package",
+      "license": "MIT",
+      "keywords": [
+        "deployment",
+        "workflow",
+        "docker",
+        "pm2",
+        "git",
+        "automation"
+      ],
       "category": "deployment",
-      "tags": ["deployment", "docker", "pm2", "git", "automation"],
-      "files": ["agents/deploy-workflow.md"]
+      "tags": [
+        "deployment",
+        "docker",
+        "pm2",
+        "git",
+        "automation",
+        "ci-cd"
+      ],
+      "strict": false
     }
   ]
 }
