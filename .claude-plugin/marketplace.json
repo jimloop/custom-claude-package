@@ -39,12 +39,7 @@
         "automation",
         "ci-cd"
       ],
-      "strict": false,
-      "files": [
-        "agents/deploy-workflow.md",
-        "skills/workdone-deploy.md",
-        "commands/workdone-deploy.md"
-      ]
+      "strict": false
     }
   ]
 }
