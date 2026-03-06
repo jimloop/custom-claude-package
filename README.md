@@ -1,6 +1,6 @@
 # custom-claude-package
 
-自定义 Claude Code 扩展包，包含部署工作流 Agent。
+自定义 Claude Code 扩展包，包含部署工作流 Agent 和 Command。
 
 ## 安装
 
@@ -10,12 +10,19 @@
 cp -r .claude/ /path/to/your/project/
 ```
 
-## 包含的 Agent
+## 包含的组件
 
-### deploy-workflow
+### Agent: deploy-workflow
 
 完整的部署工作流代理，支持：
 - 更新文档 → 自动提交 → 推送确认 → 推送执行 → 部署到云服务器
+
+### Command: workdone-deploy
+
+快速触发部署工作流的命令，支持以下触发词：
+- `workdone-deploy`
+- `work-done`
+- `deploy`
 
 ## 使用方法
 

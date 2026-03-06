@@ -72,3 +72,21 @@ tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 
 Agent instructions...
 ```
+
+## Command Format
+
+Commands are defined in Markdown with YAML frontmatter:
+
+```markdown
+---
+name: command-name
+description: Command description
+agent: agent-to-invoke
+---
+
+# Command Title
+
+Command instructions...
+```
+
+Commands can trigger agents using the `agent` field in the frontmatter.

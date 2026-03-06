@@ -1,6 +1,6 @@
 # Custom Claude Package Plugin
 
-这是一个 Claude Code 插件，包含部署工作流 Agent。
+这是一个 Claude Code 插件，包含部署工作流 Agent 和 Command。
 
 ## 安装
 
@@ -18,6 +18,9 @@ cp -r custom-claude-package/.claude ~/.claude/plugins/cache/custom-claude-packag
 
 ### Agents
 - `deploy-workflow` - 完整的部署工作流代理
+
+### Commands
+- `workdone-deploy` - 快速触发部署工作流的命令
 
 ## 使用方法
 
