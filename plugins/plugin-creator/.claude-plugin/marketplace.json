@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "plugin-creator",
+  "description": "Claude Code 插件创建向导 - 帮助生成 agents、commands、skills、hooks",
+  "owner": {
+    "name": "jimloop",
+    "url": "https://github.com/jimloop"
+  },
+  "plugins": [
+    {
+      "name": "plugin-creator",
+      "source": "./",
+      "description": "Claude Code 插件创建向导 - 引导生成 agents、commands、skills、hooks 和完整插件结构",
+      "version": "1.0.0",
+      "author": {
+        "name": "jimloop",
+        "url": "https://github.com/jimloop"
+      },
+      "license": "MIT",
+      "keywords": ["plugin", "creator", "generator", "claude-code", "wizard"],
+      "category": "development",
+      "tags": ["plugin", "creator", "generator", "wizard", "development"],
+      "strict": false
+    }
+  ]
+}

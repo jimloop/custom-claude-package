@@ -1,0 +1,11 @@
+{
+  "name": "plugin-creator",
+  "version": "1.0.0",
+  "description": "Claude Code 插件创建向导 - 帮助生成 agents、commands、skills、hooks",
+  "author": {
+    "name": "jimloop",
+    "url": "https://github.com/jimloop"
+  },
+  "license": "MIT",
+  "keywords": ["plugin", "creator", "generator", "claude-code"]
+}

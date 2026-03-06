@@ -1,66 +1,97 @@
-# custom-claude-package
+# Custom Claude Package
 
-自定义 Claude Code 扩展包，包含部署工作流 Agent 和 Command。
+Claude Code 扩展包，包含两个独立插件。
 
-## 安装
+## 插件列表
 
-将 `.claude/` 目录复制到你的项目根目录即可使用。
+### 1. Deploy Workflow
 
-```bash
-cp -r .claude/ /path/to/your/project/
+路径：`plugins/deploy-workflow`
+
+部署工作流 Agent，支持：
+- 自动 Git 提交
+- 推送确认
+- 远程部署到云服务器
+
+安装：
+```
+/plugin add /path/to/plugins/deploy-workflow
+/reload-plugins
 ```
 
-## 包含的组件
+使用：
+```
+/workdone-deploy
+```
 
-### Agent: deploy-workflow
+### 2. Plugin Creator
 
-完整的部署工作流代理，支持：
-- 更新文档 → 自动提交 → 推送确认 → 推送执行 → 部署到云服务器
+路径：`plugins/plugin-creator`
 
-### Command: workdone-deploy
+插件创建向导，支持：
+- 创建新插件骨架
+- 添加 Agent、Command、Skill、Hook
+- 验证插件配置
 
-快速触发部署工作流的命令，支持以下触发词：
-- `workdone-deploy`
-- `work-done`
-- `deploy`
+安装：
+```
+/plugin add /path/to/plugins/plugin-creator
+/reload-plugins
+```
 
-## 使用方法
+使用：
+```
+/create-plugin
+```
 
-### 1. 配置部署信息
+## 组件类型说明
 
-在你的项目 `CLAUDE.md` 中添加：
+| 类型 | 用途 | 触发方式 |
+|------|------|---------|
+| Agent | 自主执行复杂任务 | 被 Command 调用 |
+| Command | 斜杠命令入口 | 用户输入 `/命令名` |
+| Skill | 知识库和最佳实践 | 自动激活 |
+| Hook | 事件钩子脚本 | 事件触发 |
+
+## 项目结构
+
+```
+custom-claude-package/
+├── plugins/
+│   ├── deploy-workflow/      # 部署工作流插件
+│   │   ├── .claude-plugin/
+│   │   │   ├── plugin.json
+│   │   │   ├── marketplace.json
+│   │   │   └── README.md
+│   │   ├── agents/
+│   │   │   └── deploy-workflow.md
+│   │   ├── commands/
+│   │   │   └── workdone-deploy.md
+│   │   └── skills/
+│   │       └── workdone-deploy/SKILL.md
+│   └── plugin-creator/       # 插件创建工具
+│       ├── .claude-plugin/
+│       │   ├── plugin.json
+│       │   ├── marketplace.json
+│       │   └── README.md
+│       ├── agents/
+│       │   └── plugin-creator.md
+│       ├── commands/
+│       │   └── create-plugin.md
+│       └── skills/
+│           └── create-plugin/SKILL.md
+└── README.md
+```
+
+## 部署配置
+
+使用 deploy-workflow 插件前，在项目的 `CLAUDE.md` 中添加：
 
 ```markdown
 ## Deployment Configuration
 
 DEPLOY_SERVER=user@your-server.com
 DEPLOY_PATH=/path/to/project
-DEPLOY_METHOD=docker-compose  # docker-compose | pm2 | rsync
+DEPLOY_METHOD=docker-compose
 DEPLOY_SERVICE_NAME=your-service
 ```
-
-### 2. 触发工作流
-
-在 Claude Code 对话中输入：
-- `work-done` - 执行完整工作流
-- `deploy` - 仅执行部署流程
-
-## 支持的部署方式
-
-| 方式 | 说明 |
-|------|------|
-| `docker-compose` | Git pull + Docker Compose 重新构建 |
-| `pm2` | Git pull + npm install + PM2 重启 |
-| `rsync` | rsync 同步文件 + PM2 重启 |
-
-## 前提条件
-
-1. 本地已配置 SSH 密钥免密登录服务器
-2. 服务器已安装 Git 并关联远程仓库
-3. 服务器已配置 Docker 或 PM2（根据部署方式）
-
-## 安全说明
-
-- 推送和部署前都会询问用户确认
-- SSH 密码由用户在终端手动输入（或使用密钥免密登录）
-- 不在对话中存储任何敏感信息
