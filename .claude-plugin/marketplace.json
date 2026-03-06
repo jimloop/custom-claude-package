@@ -1,6 +1,6 @@
 {
-  "id": "custom-claude-package",
-  "name": "Custom Claude Package",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "custom-claude-package",
   "description": "自定义 Claude Code 扩展包 - 部署工作流 Agent",
   "plugins": [
     {
