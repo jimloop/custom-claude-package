@@ -14,6 +14,7 @@ Claude Code 扩展包，包含两个独立插件。
 - 自动 Git 提交
 - 推送确认
 - 远程部署到云服务器
+- **代码扫描 Hook**（提交前自动扫描）
 
 安装：
 ```
@@ -70,6 +71,8 @@ custom-claude-package/
 │   │   │   └── deploy-workflow.md
 │   │   ├── commands/
 │   │   │   └── workdone-deploy.md
+│   │   ├── hooks/
+│   │   │   └── code-scanning.md  # 代码扫描 Hook
 │   │   └── skills/
 │   │       └── workdone-deploy/SKILL.md
 │   └── plugin-creator/       # 插件创建工具
