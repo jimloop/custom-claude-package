@@ -1,16 +1,41 @@
 {
   "name": "custom-claude-package",
   "version": "1.0.0",
-  "description": "自定义 Claude Code 扩展包，包含部署工作流 Agent",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "自定义 Claude Code 扩展包 - 部署工作流 Agent，支持自动提交、推送、部署到云服务器",
   "keywords": [
     "claude-code",
-    "agent",
-    "deployment"
+    "agents",
+    "deployment",
+    "workflow",
+    "docker",
+    "pm2",
+    "git",
+    "automation"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": {
+    "name": "jimloop",
+    "url": "https://github.com/jimloop"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimloop/custom-claude-package.git"
+  },
+  "homepage": "https://github.com/jimloop/custom-claude-package#readme",
+  "bugs": {
+    "url": "https://github.com/jimloop/custom-claude-package/issues"
+  },
+  "files": [
+    ".claude-plugin/",
+    "agents/",
+    "skills/",
+    "commands/",
+    "hooks/",
+    "rules/",
+    "CLAUDE.md",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }

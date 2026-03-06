@@ -1,0 +1,17 @@
+{
+  "id": "custom-claude-package",
+  "name": "Custom Claude Package",
+  "description": "自定义 Claude Code 扩展包 - 部署工作流 Agent",
+  "plugins": [
+    {
+      "id": "deploy-workflow",
+      "name": "Deploy Workflow Agent",
+      "version": "1.0.0",
+      "description": "完整的部署工作流代理：更新文档 → 自动提交 → 推送确认 → 推送执行 → 部署到云服务器",
+      "author": "jimloop",
+      "category": "deployment",
+      "tags": ["deployment", "docker", "pm2", "git", "automation"],
+      "files": ["agents/deploy-workflow.md"]
+    }
+  ]
+}
