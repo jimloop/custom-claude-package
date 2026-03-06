@@ -1,0 +1,41 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "custom-claude-package",
+  "description": "自定义 Claude Code 扩展包 - 部署工作流、插件创建工具",
+  "owner": {
+    "name": "jimloop",
+    "url": "https://github.com/jimloop"
+  },
+  "metadata": {
+    "description": "自定义 Claude Code 扩展包 - 部署工作流、插件创建工具",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "deploy-workflow",
+      "source": "./plugins/deploy-workflow",
+      "description": "部署工作流 Agent - 自动提交、推送、部署到云服务器",
+      "version": "1.0.0",
+      "author": {
+        "name": "jimloop",
+        "url": "https://github.com/jimloop"
+      },
+      "license": "MIT",
+      "keywords": ["deployment", "workflow", "docker", "pm2", "git", "automation"],
+      "category": "deployment"
+    },
+    {
+      "name": "plugin-creator",
+      "source": "./plugins/plugin-creator",
+      "description": "Claude Code 插件创建向导 - 引导生成 agents、commands、skills、hooks",
+      "version": "1.0.0",
+      "author": {
+        "name": "jimloop",
+        "url": "https://github.com/jimloop"
+      },
+      "license": "MIT",
+      "keywords": ["plugin", "creator", "generator", "wizard"],
+      "category": "development"
+    }
+  ]
+}
