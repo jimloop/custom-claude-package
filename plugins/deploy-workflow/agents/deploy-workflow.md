@@ -151,7 +151,7 @@ git push origin {current-branch}
 
 ### Docker 部署（默认）
 ```bash
-ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git fetch --all && git checkout {selected-branch} && git pull origin {selected-branch} && docker-compose down && docker-compose up -d --build"
+ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git fetch --all && git checkout {selected-branch} && git pull origin {selected-branch} && docker-compose down && docker-compose up -d --build --no-cache --force-recreate"
 ```
 
 ### PM2 部署
@@ -202,7 +202,7 @@ DEPLOY_SERVICE_NAME=your-service        # 服务名称
 
 ```bash
 # Docker
-ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && docker-compose up -d --build"
+ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && docker-compose up -d --build --no-cache --force-recreate"
 
 # PM2
 ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && pm2 restart all"
@@ -211,7 +211,7 @@ ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && pm2 restart al
 或切换回之前的分支：
 
 ```bash
-ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git checkout {previous-branch} && docker-compose up -d --build"
+ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git checkout {previous-branch} && docker-compose up -d --build --no-cache --force-recreate"
 ```
 
 ## 输出格式
