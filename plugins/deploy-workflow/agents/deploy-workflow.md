@@ -107,35 +107,56 @@ tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob", "Agent"]
 git push origin {current-branch}
 ```
 
-### 阶段 6：部署确认
+### 阶段 6：部署确认与分支选择
 
 **必须询问用户确认**：
 ```
 是否部署到云服务器？
-- 是 - 自动执行部署命令
+- 是 - 选择部署分支后执行部署
 - 否 - 完成流程
 ```
+
+**用户确认后，必须让用户选择部署分支**：
+```
+请选择要部署的分支：
+
+[1] main (当前分支)
+[2] develop
+[3] feature/xxx
+[4] 输入其他分支名称
+
+请选择 [1-4]：
+```
+
+执行步骤：
+1. 获取所有分支列表：`git branch -a`
+2. 展示本地分支供用户选择
+3. 用户选择后，记录选择的分支名称
+4. 在部署命令中使用用户选择的分支
 
 ### 阶段 7：自动部署执行
 
 **前提条件：已配置 SSH 密钥免密登录**
 
 1. 读取 `CLAUDE.md` 中的部署配置（`DEPLOY_SERVER`、`DEPLOY_PATH`、`DEPLOY_METHOD`）
-2. 根据 `DEPLOY_METHOD` 执行对应的部署命令
-3. 部署完成后自动验证服务状态
+2. 使用用户选择的分支 `{selected-branch}`
+3. 根据 `DEPLOY_METHOD` 执行对应的部署命令
+4. 部署完成后自动验证服务状态
 
 ## 部署命令模板
 
 根据 `CLAUDE.md` 中的 `DEPLOY_METHOD` 配置自动选择：
 
+**注意：`{selected-branch}` 为用户在阶段 6 选择的分支**
+
 ### Docker 部署（默认）
 ```bash
-ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git pull && docker-compose down && docker-compose up -d --build"
+ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git fetch --all && git checkout {selected-branch} && git pull origin {selected-branch} && docker-compose down && docker-compose up -d --build"
 ```
 
 ### PM2 部署
 ```bash
-ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git pull && npm install --production && pm2 restart all"
+ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git fetch --all && git checkout {selected-branch} && git pull origin {selected-branch} && npm install --production && pm2 restart all"
 ```
 
 ### rsync 部署
@@ -187,6 +208,12 @@ ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && docker-compose
 ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && pm2 restart all"
 ```
 
+或切换回之前的分支：
+
+```bash
+ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git checkout {previous-branch} && docker-compose up -d --build"
+```
+
 ## 输出格式
 
 每个阶段完成后显示进度：
@@ -200,7 +227,8 @@ ssh $DEPLOY_SERVER "cd $DEPLOY_PATH && git reset --hard HEAD~1 && pm2 restart al
 ### 🔍 步骤 4/7：代码扫描 - 执行中...
 ### ✅ 步骤 4/7：代码扫描 - 通过
 ### ✅ 步骤 5/7：推送执行 - 完成
-### ❓ 步骤 6/7：部署确认 - 等待用户确认
+### ❓ 步骤 6/7：部署确认与分支选择 - 等待用户确认
+### 🌿 步骤 6/7：分支选择 - 用户选择了 main 分支
 ### 🚀 步骤 7/7：自动部署 - 执行中...
 ### ✅ 步骤 7/7：自动部署 - 完成
 ```

@@ -13,7 +13,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 2. **自动提交** - 整理变更，生成 commit message 并提交
 3. **推送确认** - 推送前**必须**询问用户确认
 4. **推送执行** - 用户确认后执行 `git push`
-5. **部署确认** - 部署前**必须**询问用户确认
+5. **部署确认与分支选择** - 部署前**必须**询问用户确认，并让用户选择部署分支
 6. **部署执行** - 用户确认后执行部署脚本
 
 ## Deployment Configuration (部署配置)
